@@ -186,7 +186,7 @@ public setStatusCurso(statusCurso: boolean) {
             respostaBD.rows.forEach((linha: any) => {
                 const novoCurso = new Curso(
                     linha.curso,
-                    linha.cargaHoraria,
+                    linha.carga_horaria,
                     linha.modalidade,
                     linha.local
                 );
@@ -233,7 +233,7 @@ public setStatusCurso(statusCurso: boolean) {
 
             // Verifica se a quantidade de linhas modificadas é diferente de 0
             if (respostaBD.rowCount != 0) {
-                console.log(`Médico cadastrado com sucesso! ID do médico: ${respostaBD.rows[0].id_curso}`);
+                console.log(`curso cadastrado com sucesso! ID do médico: ${respostaBD.rows[0].id_curso}`);
                 // true significa que o cadastro foi feito
                 return true;
             }
@@ -262,16 +262,14 @@ public setStatusCurso(statusCurso: boolean) {
 
         try {
             // Cria a matricula (query) para remover o curso
-            const queryDeleteMatriculaCurso = `UPDATE matricula 
-                                                    SET status = FALSE
+            const queryDeleteMatriculaCurso = `DELETE FROM matricula 
                                                     WHERE id_curso=${id_curso};`;
 
             // remove os emprestimos associado ao Curso
             await database.query(queryDeleteMatriculaCurso);
 
             // Construção da query SQL para deletar o Curso.
-            const queryDeleteCurso = `UPDATE curso 
-                                        SET status_curso = FALSE
+            const queryDeleteCurso = `DELETE FROM curso 
                                         WHERE id_curso=${id_curso};`;
                                         
 
@@ -302,15 +300,16 @@ public setStatusCurso(statusCurso: boolean) {
     * @returns true caso sucesso, false caso erro
     */
     static async atualizarCadastroCurso(curso: Curso): Promise<Boolean> {
+
         let queryResult = false; // Variável para armazenar o resultado da operação.
         try {
             // Construção da query SQL para atualizar os dados do curso no banco de dados.
-            const queryAtualizarCurso = `UPDATE Curso SET 
-                                            curso = '${curso.getCurso().toUpperCase()}', 
-                                            cargaHoraria = '${curso.getCargaHoraria()}',
+            const queryAtualizarCurso = `UPDATE curso SET 
+                                            curso = '${curso.getCurso()}', 
+                                            carga_horaria = '${curso.getCargaHoraria()}',
                                             modalidade = '${curso.getModalidade()}', 
-                                            local = '${curso.getLocal()}'                                         
-                                        WHERE id_curso = ${curso.idCurso}`;
+                                            local = '${curso.getLocal()}'
+                                         WHERE id_curso = ${curso.getIdCurso()};`;
 
             // Executa a query de atualização e verifica se a operação foi bem-sucedida.
             console.log(queryAtualizarCurso)

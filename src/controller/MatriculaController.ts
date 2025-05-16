@@ -5,7 +5,7 @@ interface MatriculaDTO {
     idAluno: number,
     idCurso: number,
     dataMatricula: Date,
-    status: boolean
+    statusMatriculaRegistro: boolean
 }
 
 /**
@@ -26,10 +26,10 @@ export class MatriculaController extends Matricula {
     static async todos(req: Request, res: Response): Promise<any> {
         try {
             // acessa a função de listar os Matricula e armazena o resultado
-            const listaDeMatricula = await Matricula.listagemMatricula();
+            const listaDeMatriculas = await Matricula.listagemMatricula();
 
             // retorna a lista de Matricula há quem fez a requisição web
-            return res.status(200).json(listaDeMatricula);
+            return res.status(200).json(listaDeMatriculas);
         } catch (error) {
             // lança uma mensagem de erro no console
             console.log('Erro ao acessar listagem de Matricula');
@@ -56,34 +56,40 @@ export class MatriculaController extends Matricula {
     */
     static async novo(req: Request, res: Response): Promise<any> {
         try {
-            const matriculaRecebida: MatriculaDTO = {
-                ...req.body,
-                idAluno: parseInt(req.body.idAluno), // Conversão direta
-                idCurso: parseInt(req.body.idCurso)
-            };
-    
+            // recuperando informações do corpo da requisição e colocando em um objeto da interface EmprestimoDTO
+            const matriculaRecebida: MatriculaDTO = req.body;
+
+            // instanciando um objeto do tipo Emprestimo com as informações recebidas
             const novoMatricula = new Matricula(
                 matriculaRecebida.idAluno,
                 matriculaRecebida.idCurso,
-                matriculaRecebida.dataMatricula,
-                matriculaRecebida.status
-            );    
+                matriculaRecebida.dataMatricula
+            );
+            console.log(novoMatricula)
+
+            // Chama a função de cadastro passando o objeto como parâmetro
             const repostaClasse = await Matricula.cadastroMatricula(novoMatricula);
-    
+
+            // verifica a resposta da função
             if (repostaClasse) {
-                return res.status(200).json({ mensagem: "Matricula cadastrada com sucesso!" });
+                // retornar uma mensagem de sucesso
+                return res.status(200).json({ mensagem: "Matricula cadastrado com sucesso!" });
             } else {
-                return res.status(400).json({ mensagem: "Erro ao cadastrar a Matricula. Entre em contato com o administrador do sistema." });
+                // retorno uma mensagem de erro
+                return res.status(400).json({ mensagem: "Erro ao cadastra o Matricula. Entre em contato com o administrador do sistema." })
             }
-    
+
         } catch (error) {
+            // lança uma mensagem de erro no console
             console.log(`Erro ao cadastrar um Matricula. ${error}`);
-            return res.status(400).json({ mensagem: "Não foi possível cadastrar  Matricula. Entre em contato com o administrador do sistema." });
+
+            // retorna uma mensagem de erro há quem chamou a mensagem
+            return res.status(400).json({ mensagem: "Não foi possível cadastrar o Matricula. Entre em contato com o administrador do sistema." });
         }
     }
 
     static async remover(req: Request, res: Response): Promise<any> {
-        console.log("chegou");
+      
         try {
             const idMatricula = parseInt(req.params.idMatricula);
             const result = await Matricula.removerMatricula(idMatricula);
@@ -91,18 +97,18 @@ export class MatriculaController extends Matricula {
             if (result) {
                 return res.status(200).json('Matricula removida com sucesso');
             } else {
-                return res.status(401).json('Erro ao deletar a matricula');
+                return res.status(401).json('Erro ao deletar a Matricula');
             }
         } catch (error) {
-            console.log("Erro ao remover a matricula");
+            console.log("Erro ao remover a Matricula");
             console.log(error);
             return res.status(500).send("error");
         }
     }
     /**
-     * Método para atualizar o cadastro de um matricula.
+     * Método para atualizar o cadastro de um Matricula.
      * 
-     * @param req Objeto de requisição do Express, contendo os dados atualizados do matricula
+     * @param req Objeto de requisição do Express, contendo os dados atualizados do Matricula
      * @param res Objeto de resposta do Express
      * @returns Retorna uma resposta HTTP indicando sucesso ou falha na atualização
      */
@@ -111,30 +117,29 @@ export class MatriculaController extends Matricula {
             // Desestruturando objeto recebido pelo front-end
             const dadosRecebidos: MatriculaDTO = req.body;
 
-            // Instanciando objeto matricula
+            // Instanciando objeto Matricula
             const matricula = new Matricula(
                 dadosRecebidos.idAluno,
                 dadosRecebidos.idCurso,
-                dadosRecebidos.dataMatricula,
-                dadosRecebidos.status
+                dadosRecebidos.dataMatricula
             );
 
-            // Define o ID do matricula, que deve ser passado na query string
+            // Define o ID do Matricula, que deve ser passado na query string
             matricula.setIdMatricula(parseInt(req.params.idMatricula));
             
             console.log(dadosRecebidos);
 
-            // Chama o método para atualizar o cadastro do matricula no banco de dados
+            // Chama o método para atualizar o cadastro do Matricula no banco de dados
             if (await Matricula.atualizarCadastroMatricula(matricula)) {
                 return res.status(200).json({ mensagem: "Matricula atualizada com sucesso!" });
             } else {
-                return res.status(400).json('Não foi possível atualizar o matricula no banco de dados');
+                return res.status(400).json('Não foi possível atualizar o Matricula no banco de dados');
             }
         } catch (error) {
             // Caso ocorra algum erro, este é registrado nos logs do servidor
             console.error(`Erro no modelo: ${error}`);
             // Retorna uma resposta com uma mensagem de erro
-            return res.json({ mensagem: "Erro ao atualizar matricula." });
+            return res.json({ mensagem: "Erro ao atualizar Matricula." });
         }
 
     }

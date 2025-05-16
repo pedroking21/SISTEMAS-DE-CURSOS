@@ -11,153 +11,152 @@ export class Matricula {
     /* Atributos */
 
     /**
-     * Identificador da matricula.
+     * Identificador da Matricula.
      */
     private idMatricula: number = 0;
 
-  
     /**
-     * Número da sala de atendimento.
+     * Nome do paciente da Matricula.
      */
     private idAluno: number;
 
     /**
-     * Número da sala de atendimento.
-     */
+    * Nome do paciente da Matricula.
+    */
     private idCurso: number;
 
     /**
-     * Número da sala de atendimento.
+     * Data da Matricula.
      */
     private dataMatricula: Date;
 
-    /**
-     * Status da matricula (por exemplo, "agendada", "realizada", etc.).
-     */
-    private status: boolean = true;
 
+    private statusMatriculaRegistro: boolean = true;
     /**
      * Construtor da classe Matricula.
      * 
-     * @param nome Nome do paciente.
-     * @param data Data da matricula.
-     * @param hora Hora da matricula.
-     * @param diagnostico Diagnóstico realizado.
-     * @param receita Receita médica fornecida.
-     * @param salaAtendimento Sala de atendimento.
-     
+     * @param idAluno Nome do paciente.
+     * @param idCurso Data da Matricula.
+     * @param dataMatricula Hora da Matricula.
      */
     constructor(
         idAluno: number,
         idCurso: number,
         dataMatricula: Date,
-        status: boolean        
     ) {
         this.idAluno = idAluno;
         this.idCurso = idCurso;
         this.dataMatricula = dataMatricula;
-        this.status = status;
     }
-
-
-    /* Métodos get e set */
-
     /**
-     * Recupera o identificador da matricula.
-     * @returns O identificador da matricula.
+     * Recupera o nome do paciente.
+     * @returns O nome do paciente.
      */
     public getIdMatricula(): number {
         return this.idMatricula;
     }
 
     /**
-     * Define o identificador da matricula.
-     * @param idMatricula O identificador da matricula.
+     * Define o nome do paciente.
+     * @param nome O nome do paciente.
      */
     public setIdMatricula(idMatricula: number): void {
         this.idMatricula = idMatricula;
     }
 
 
-    /**
- * Recupera o identificador da matricula.
- * @returns O identificador da matricula.
+/**
+ * Recupera o identificador da Matricula.
+ * @returns O identificador da Matricula.
  */
-    public getIdAluno(): number {
-        return this.idAluno;
-    }
+public getIdAluno(): number {
+    return this.idAluno;
+}
+
+/**
+ * Define o identificador da Matricula.
+ * @param idAluno O identificador da Matricula.
+ */
+public setIdAluno(idAluno: number): void {
+    this.idAluno = idAluno;
+}
+
+    /* Métodos get e set */
 
     /**
-     * Define o identificador da matricula.
-     * @param idMatricula O identificador da matricula.
+     * Recupera o identificador da Matricula.
+     * @returns O identificador da Matricula.
      */
-    public setIdAluno(idAluno: number): void {
-        this.idAluno = idAluno;
-    }
-
-    /**
-* Recupera o identificador da matricula.
-* @returns O identificador da matricula.
-*/
     public getIdCurso(): number {
         return this.idCurso;
     }
 
     /**
-     * Define o identificador da matricula.
-     * @param idMatricula O identificador da matricula.
+     * Define o identificador da Curso.
+     * @param idCurso O identificador da Curso.
      */
     public setIdCurso(idCurso: number): void {
         this.idCurso = idCurso;
     }
 
+
+    
+
     /**
-     * Recupera o nome do paciente.
-     * @returns O nome do paciente.
-     */
+* Recupera o identificador da Matricula.
+* @returns O identificador da Matricula.
+*/
     public getDataMatricula(): Date {
         return this.dataMatricula;
-  
     }
 
     /**
-     * Define o nome do paciente.
-     * @param nome O nome do paciente.
+     * Define o identificador da Matricula.
+     * @param idDataMatricula O identificador da Matricula.
      */
     public setDataMatricula(dataMatricula: Date): void {
         this.dataMatricula = dataMatricula;
     }
 
     /**
-     * Recupera a data da matricula.
-     * @returns A data da matricula.
-     */
-    public getStatus(): boolean {
-        return this.status;
+* Retorna o statusMatriculaRegistro no sistema
+* 
+* @return status do Matricula do sistema 
+*/
+    public getStatusMatriculaRegistro(): boolean {
+        return this.statusMatriculaRegistro;
     }
 
-public setStatus(status: boolean): void {
-    this.status = status;
-}
 
-/**
-* Busca e retorna uma lista de Matricula do banco de dados.
-* @returns Um array de objetos do tipo `Matricula` em caso de sucesso ou `null` se ocorrer um erro durante a matricula.
-* 
-* - A função realiza uma matricula SQL para obter todas as informações da tabela "Matricula".
-* - Os dados retornados do banco de dados são usados para instanciar objetos da classe `Matricula`.
-* - Cada Matricula é adicionado a uma lista que será retornada ao final da execução.
-* - Se houver falha na matricula ao banco, a função captura o erro, exibe uma mensagem no console e retorna `null`.
-*/
-static async listagemMatricula(): Promise<Array<Matricula> | null> {
+    /**
+     * Atribui um valoro statusMatriculaRegistro do Matricula
+     * 
+     * @param _statusMatriculaRegistro : statusMatriculaRegistro do Matricula
+     */
+    public setStatusMatriculaRegistro(statusMatriculaRegistro: boolean) {
+        this.statusMatriculaRegistro = statusMatriculaRegistro;
+    }
+
+
+
+    /**
+    * Busca e retorna uma lista de Matricula do banco de dados.
+    * @returns Um array de objetos do tipo `Matricula` em caso de sucesso ou `null` se ocorrer um erro durante a Matricula.
+    * 
+    * - A função realiza uma Matricula SQL para obter todas as informações da tabela "Matricula".
+    * - Os dados retornados do banco de dados são usados para instanciar objetos da classe `Matricula`.
+    * - Cada Matricula é adicionado a uma lista que será retornada ao final da execução.
+    * - Se houver falha na Matricula ao banco, a função captura o erro, exibe uma mensagem no console e retorna `null`.
+    */
+    static async listagemMatricula(): Promise<Array<Matricula> | null> {
         // objeto para armazenar a lista de Matricula
-        const listaDeMatricula: Array<Matricula> = [];
+        const listaDeMatriculas: Array<Matricula> = [];
 
         try {
-            // query de matricula ao banco de dados
-            const querySelectMatricula = `SELECT * FROM matricula WHERE status = true;`;
+            // query de Matricula ao banco de dados
+            const querySelectMatricula = `SELECT * FROM matricula;`;
 
-            // fazendo a matricula e guardando a resposta
+            // fazendo a Matricula e guardando a resposta
             const respostaBD = await database.query(querySelectMatricula);
 
             // usando a resposta para instanciar um objeto do tipo Matricula
@@ -166,22 +165,23 @@ static async listagemMatricula(): Promise<Array<Matricula> | null> {
                 const novoMatricula = new Matricula(
                     linha.idAluno,
                     linha.idCurso,
-                    linha.dataMatricula,
-                    linha.status
+                    linha.dataMatricula
                 );
 
                 // atribui o ID objeto
                 novoMatricula.setIdMatricula(linha.id_matricula);
-                novoMatricula.setIdAluno(linha.idAluno);
+                novoMatricula.setIdAluno(linha.id_aluno);
+                novoMatricula.setIdCurso(linha.id_curso);
+                novoMatricula.setDataMatricula(linha.data_matricula);
 
                 // adiciona o objeto na lista
-                listaDeMatricula.push(novoMatricula);
+                listaDeMatriculas.push(novoMatricula);
 
                 console.log(novoMatricula)
             });
 
             // retorna a lista de Matricula
-            return listaDeMatricula;
+            return listaDeMatriculas;
         } catch (error) {
             console.log('Erro ao buscar lista de Matricula');
             return null;
@@ -207,13 +207,11 @@ static async listagemMatricula(): Promise<Array<Matricula> | null> {
     static async cadastroMatricula(matricula: Matricula): Promise<boolean> {
         try {
             // query para fazer insert de um Matricula no banco de dados
-            const queryInsertMatricula = `INSERT INTO Matricula (id_aluno, id_curso, data_matricula, status)
+            const queryInsertMatricula = `INSERT INTO Matricula (id_aluno, id_curso, data_matricula)
                                         VALUES ( 
-                                            '${matricula.getIdAluno()}',
-                                            '${matricula.getIdCurso()}',
-                                            '${matricula.getDataMatricula()}',
-                                            '${matricula.getStatus()}'
-                                            )
+                                            '${matricula.getIdAluno()}', 
+                                            '${matricula.getIdCurso()}', 
+                                            '${matricula.getDataMatricula()}')
                                                RETURNING id_matricula;`;
 
             console.log(queryInsertMatricula);
@@ -244,21 +242,20 @@ static async listagemMatricula(): Promise<Array<Matricula> | null> {
     }
 
     /**
-         * Remove um matricula do banco de dados.
+         * Remove um Matricula do banco de dados.
          * 
-         * A função realiza a desativação do matricula e suas matriculas associadas no banco de dados.
+         * A função realiza a desativação do Matricula e suas Matricula associadas no banco de dados.
          * 
-         * @param id_matricula Identificador único do matricula a ser removido
+         * @param id_matricula Identificador único do Matricula a ser removido
          * @returns {Promise<boolean>} Retorna true se a operação foi bem-sucedida, e false em caso de erro.
          */
     static async removerMatricula(id_matricula: number): Promise<Boolean> {
         let queryResult = false;
 
         try {
-            // Atualiza o status da matricula para indicar que o Matricula não está mais ativo
-            const queryDeleteMatricula = `UPDATE matricula 
-                                                    SET status_matricula_registro = FALSE
-                                                    WHERE id_matricula=${id_matricula};`;
+            // Atualiza o status da matricula para indicar que o matricula não está mais ativo
+            const queryDeleteMatricula = `DELETE FROM matricula 
+                                            WHERE id_matricula = ${id_matricula};`;
 
             // Executa a atualização de status do Matricula
             await database.query(queryDeleteMatricula)
@@ -271,7 +268,7 @@ static async listagemMatricula(): Promise<Array<Matricula> | null> {
             return queryResult; // Retorna o resultado da operação
 
         } catch (error) {
-            console.log(`Erro na matricula: ${error}`);
+            console.log(`Erro na Matricula: ${error}`);
             return queryResult; // Retorna false em caso de erro
         }
     }
@@ -286,12 +283,11 @@ static async listagemMatricula(): Promise<Array<Matricula> | null> {
         let queryResult = false; // Variável para armazenar o resultado da operação.
 
         try {
-            // Matricula SQL para atualizar os dados do paciente
+            // matricula SQL para atualizar os dados do paciente
             const queryAtualizarMatricula = `UPDATE matricula
-                                                SET id_aluno = ${matricula.getIdAluno()},
-                                                    id_curso = ${matricula.getIdCurso()},
-                                                    data_matricula = '${matricula.getDataMatricula()}',
-                                                    status = ${matricula.getStatus()}                                                                                            
+                                                SET id_aluno='${matricula.getIdAluno()}',
+                                                    id_curso='${matricula.getIdCurso()}',
+                                                    data_matricula='${matricula.getDataMatricula()}'                                                                                              
                                                 WHERE id_matricula=${matricula.idMatricula};`;
 
             // Executa a matricula de atualização
@@ -306,9 +302,8 @@ static async listagemMatricula(): Promise<Array<Matricula> | null> {
             return queryResult; // Retorna o resultado da operação
 
         } catch (error) {
-            console.log(`Erro na matricula: ${error}`);
+            console.log(`Erro na Matricula: ${error}`);
             return queryResult; // Retorna false em caso de erro
         }
     }
 }
-

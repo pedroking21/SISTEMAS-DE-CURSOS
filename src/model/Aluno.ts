@@ -295,16 +295,14 @@ public setStatusAluno(statusAluno: boolean) {
 
         try {
             // Atualiza o status da consulta para indicar que o aluno não está mais ativo
-            const queryDeleteMatriculaAluno = `UPDATE matricula 
-                                                SET status = FALSE
+            const queryDeleteMatriculaAluno = `DELETE matricula 
                                                 WHERE id_aluno=${id_aluno};`;
 
             // Executa a atualização de status das consultas associadas ao aluno
             await database.query(queryDeleteMatriculaAluno);
 
             // Atualiza o status do aluno para desativado
-            const queryDeleteAluno = `UPDATE aluno 
-                                         SET status_aluno = FALSE
+            const queryDeleteAluno = `DELETE aluno 
                                          WHERE id_aluno=${id_aluno};`;
 
             // Executa a atualização de status do aluno

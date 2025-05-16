@@ -40,11 +40,11 @@ CREATE TABLE Matricula (
     id_aluno INT NOT NULL,
     id_curso INT NOT NULL,
     data_matricula DATE NOT NULL,
-    status BOOLEAN NOT NULL
+    status_matricula_registro BOOLEAN NOT NULL DEFAULT TRUE
 );
 
 -- Inserção de exemplo para Matricula
-INSERT INTO Matricula (id_aluno, id_curso, data_matricula, status)
+INSERT INTO Matricula (id_aluno, id_curso, data_matricula, status_matricula_registro)
 VALUES 
 (1, 1, '2025-05-14', TRUE),
 (2, 2, '2025-05-14', FALSE);
